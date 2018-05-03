@@ -27,7 +27,7 @@ export class HomePage {
   }
 
   public buscarPelicula(): void {
-    let loading = this.loadingCtrl.create({ content: 'Buscando película..'});
+    let loading = this.loadingCtrl.create({ content: 'Buscando película..' });
     loading.present();
     this.peliculasProvider.buscarPelicula('avengers').then(
       (success) => { this.successBuscarPelicula(success, loading) },
@@ -36,6 +36,10 @@ export class HomePage {
 
   private successBuscarPelicula(resultado, loading): void {
     loading.dismiss();
+    let data = {
+      peliculasLista: resultado
+    };
+    this.navCtrl.push('listado-peliculas', data);
     console.log('successBuscarPelicula', resultado);
   }
 

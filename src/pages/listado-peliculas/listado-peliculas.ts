@@ -18,23 +18,23 @@ import { PeliculasProvider } from '../../providers/peliculas/peliculas';
   templateUrl: 'listado-peliculas.html',
 })
 export class ListadoPeliculasPage {
-  public textoPrueba;
-  
+  public listadoPeliculas;
+  public arrayPeliculas: any[];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public peliculasProvider: PeliculasProvider,
   ) {
+    console.log('Constructor');
+    this.arrayPeliculas = [];
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListadoPeliculasPage');
-    this.textoPrueba = this.peliculasProvider.getNombrePelicula();
-  }
-
-  public actualizarTexto(): void {
-    this.peliculasProvider.setNombrePelicula('Cambió el texto');
-    this.textoPrueba = this.peliculasProvider.getNombrePelicula();
+    this.listadoPeliculas = this.navParams.get('peliculasLista');
+    this.arrayPeliculas = this.listadoPeliculas.Search;
+    console.log('this.listadoPeliculas', this.listadoPeliculas);
   }
 
 }
