@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { PeliculasProvider } from '../../providers/peliculas/peliculas';
 
+import { HomePage } from '../home/home';
+
 /**
  * Generated class for the ListadoPeliculasPage page.
  *
@@ -33,8 +35,13 @@ export class ListadoPeliculasPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListadoPeliculasPage');
     this.listadoPeliculas = this.navParams.get('peliculasLista');
+
     this.arrayPeliculas = this.listadoPeliculas.Search;
     console.log('this.listadoPeliculas', this.listadoPeliculas);
+  }
+
+  public goDetallePelicula(pelicula: any): void {
+    console.log('goDetallePelicula', pelicula);
   }
 
 }

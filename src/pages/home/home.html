@@ -7,6 +7,14 @@
 </ion-header>
 
 <ion-content padding>
-  <p>{{textoPrueba}}</p>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label stacked>Ingrese texto</ion-label>
+        <ion-input color="primary" clearInput [(ngModel)]="datosBusqueda.texto"></ion-input>
+      </ion-item>
+
+    </ion-col>
+  </ion-row>
   <button ion-button block (click)="buscarPelicula()" uppercase>Buscar película</button>
 </ion-content>

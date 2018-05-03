@@ -7,7 +7,7 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col col-4 col-md-3 *ngFor="let pelicula of arrayPeliculas">
+      <ion-col col-4 col-md-3 *ngFor="let pelicula of arrayPeliculas" (click)="goDetallePelicula(pelicula);">
         <img [src]="pelicula.Poster" [alt]="'Poster de película ' + pelicula.Title" [title]="'Poster de película ' + pelicula.Title">
         <!-- {{pelicula.Title}} -->
       </ion-col>

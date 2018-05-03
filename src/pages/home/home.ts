@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, IonicPage } from 'ionic-angular';
 import { PeliculasProvider } from '../../providers/peliculas/peliculas';
 
 @Component({
@@ -7,19 +7,18 @@ import { PeliculasProvider } from '../../providers/peliculas/peliculas';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  public textoPrueba: any;
+  public datosBusqueda: any;
 
   constructor(
     public navCtrl: NavController,
     public peliculasProvider: PeliculasProvider,
     private loadingCtrl: LoadingController
   ) {
-
+    this.datosBusqueda = {};
   }
 
   ionViewDidEnter() {
     console.log('ionViewDidLoad home');
-    this.textoPrueba = this.peliculasProvider.getNombrePelicula();
   }
 
   public irListadoPeliculas(): void {
@@ -27,9 +26,13 @@ export class HomePage {
   }
 
   public buscarPelicula(): void {
+    if (!this.datosBusqueda.texto) {
+      alert('Meteme texto amiwo');
+      return;
+    }
     let loading = this.loadingCtrl.create({ content: 'Buscando película..' });
     loading.present();
-    this.peliculasProvider.buscarPelicula('avengers').then(
+    this.peliculasProvider.buscarPelicula(this.datosBusqueda.texto).then(
       (success) => { this.successBuscarPelicula(success, loading) },
       (error) => { this.errorBuscarPelicula(error, loading) });
   }
