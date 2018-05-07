@@ -42,7 +42,6 @@ export class ListadoPeliculasPage {
     }
 
     this.arrayPeliculas = this.listadoPeliculas.Search;
-    console.log('this.listadoPeliculas', this.listadoPeliculas);
   }
 
   public goDetallePelicula(pelicula: any): void {
@@ -53,9 +52,13 @@ export class ListadoPeliculasPage {
     });
   }
 
-  public abrirLinkImdb(link): void {
-    let url = 'imdb///title/' + link;
+  public abrirLinkImdb(pelicula): void {
+    let url = 'https://imdb.com/title/' + pelicula.imdbID;
     window.open(url, '_system');
+  }
+
+  public sharePelicula(pelicula): void {
+    console.log('sharePelicula', pelicula);
   }
 
 }
