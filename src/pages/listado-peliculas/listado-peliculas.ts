@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { PeliculasProvider } from '../../providers/peliculas/peliculas';
 
@@ -27,6 +27,7 @@ export class ListadoPeliculasPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public peliculasProvider: PeliculasProvider,
+    private modalCtrl: ModalController,
   ) {
     console.log('Constructor');
     this.arrayPeliculas = [];
@@ -41,7 +42,16 @@ export class ListadoPeliculasPage {
   }
 
   public goDetallePelicula(pelicula: any): void {
-    console.log('goDetallePelicula', pelicula);
+    let modal = this.modalCtrl.create('detalle-pelicula', { pelicula });
+    modal.present();
+    modal.onDidDismiss((data) => {
+      console.log('Modal se cierra');
+    });
+  }
+
+  public abrirLinkImdb(link): void {
+    let url = 'imdb///title/' + link;
+    window.open(url, '_system');
   }
 
 }

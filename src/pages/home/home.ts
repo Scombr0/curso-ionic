@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, IonicPage } from 'ionic-angular';
+import { NavController, LoadingController, IonicPage, ToastController } from 'ionic-angular';
 import { PeliculasProvider } from '../../providers/peliculas/peliculas';
 
 @Component({
@@ -12,7 +12,8 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public peliculasProvider: PeliculasProvider,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
   ) {
     this.datosBusqueda = {};
   }
@@ -27,7 +28,12 @@ export class HomePage {
 
   public buscarPelicula(): void {
     if (!this.datosBusqueda.texto) {
-      alert('Meteme texto amiwo');
+      let toastError = this.toastCtrl.create({
+        message: 'Ingrese texto por favor',
+        duration: 1500,
+        position: 'bottom'
+      });
+      toastError.present();
       return;
     }
     let loading = this.loadingCtrl.create({ content: 'Buscando película..' });
