@@ -16,5 +16,5 @@
 
     </ion-col>
   </ion-row>
-  <button ion-button block (click)="buscarPelicula()" uppercase>Buscar película</button>
+  <button ion-button block (click)="buscarPelicula();" uppercase [disabled]="buscandoPeliculas">Buscar película</button>
 </ion-content>

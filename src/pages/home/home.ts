@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavController, LoadingController, IonicPage, ToastController } from 'ionic-angular';
 import { PeliculasProvider } from '../../providers/peliculas/peliculas';
 
@@ -8,14 +8,17 @@ import { PeliculasProvider } from '../../providers/peliculas/peliculas';
 })
 export class HomePage {
   public datosBusqueda: any;
+  public buscandoPeliculas: boolean;
 
   constructor(
     public navCtrl: NavController,
     public peliculasProvider: PeliculasProvider,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
+    private ngZone: NgZone,
   ) {
     this.datosBusqueda = {};
+    this.buscandoPeliculas = false;
   }
 
   ionViewDidEnter() {
@@ -36,14 +39,17 @@ export class HomePage {
       toastError.present();
       return;
     }
+    this.buscandoPeliculas = true;
     let loading = this.loadingCtrl.create({ content: 'Buscando película..' });
     loading.present();
+
     this.peliculasProvider.buscarPelicula(this.datosBusqueda.texto).then(
       (success) => { this.successBuscarPelicula(success, loading) },
       (error) => { this.errorBuscarPelicula(error, loading) });
   }
 
   private successBuscarPelicula(resultado, loading): void {
+    this.buscandoPeliculas = false;
     loading.dismiss();
     let data = {
       peliculasLista: resultado
@@ -53,6 +59,7 @@ export class HomePage {
   }
 
   private errorBuscarPelicula(error, loading): void {
+    this.buscandoPeliculas = false;
     loading.dismiss();
     console.log('errorBuscarPelicula', error);
   }
