@@ -10,11 +10,15 @@
   <ion-row>
     <ion-col>
       <ion-item>
-        <ion-label stacked>Ingrese texto</ion-label>
-        <ion-input color="primary" clearInput [(ngModel)]="datosBusqueda.texto"></ion-input>
+        <ion-label stacked>Ingrese usuario</ion-label>
+        <ion-input color="primary" clearInput [(ngModel)]="data.username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Ingrese contraseña</ion-label>
+        <ion-input type="password" color="primary" clearInput [(ngModel)]="data.password"></ion-input>
       </ion-item>
 
     </ion-col>
   </ion-row>
-  <button ion-button block (click)="buscarPelicula();" uppercase [disabled]="buscandoPeliculas">Buscar película</button>
+  <button ion-button block (click)="login();" uppercase [disabled]="buscandoPeliculas">Ingresar</button>
 </ion-content>

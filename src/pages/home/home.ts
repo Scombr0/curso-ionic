@@ -7,7 +7,7 @@ import { PeliculasProvider } from '../../providers/peliculas/peliculas';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  public datosBusqueda: any;
+  public data: any;
   public buscandoPeliculas: boolean;
 
   constructor(
@@ -17,7 +17,7 @@ export class HomePage {
     private toastCtrl: ToastController,
     private ngZone: NgZone,
   ) {
-    this.datosBusqueda = {};
+    this.data = {};
     this.buscandoPeliculas = false;
   }
 
@@ -29,39 +29,9 @@ export class HomePage {
     this.navCtrl.push('listado-peliculas');
   }
 
-  public buscarPelicula(): void {
-    if (!this.datosBusqueda.texto) {
-      let toastError = this.toastCtrl.create({
-        message: 'Ingrese texto por favor',
-        duration: 1500,
-        position: 'bottom'
-      });
-      toastError.present();
-      return;
-    }
-    this.buscandoPeliculas = true;
-    let loading = this.loadingCtrl.create({ content: 'Buscando película..' });
-    loading.present();
-
-    this.peliculasProvider.buscarPelicula(this.datosBusqueda.texto).then(
-      (success) => { this.successBuscarPelicula(success, loading) },
-      (error) => { this.errorBuscarPelicula(error, loading) });
-  }
-
-  private successBuscarPelicula(resultado, loading): void {
-    this.buscandoPeliculas = false;
-    loading.dismiss();
-    let data = {
-      peliculasLista: resultado
-    };
-    this.navCtrl.push('listado-peliculas', data);
-    console.log('successBuscarPelicula', resultado);
-  }
-
-  private errorBuscarPelicula(error, loading): void {
-    this.buscandoPeliculas = false;
-    loading.dismiss();
-    console.log('errorBuscarPelicula', error);
+  public login(): void {
+    console.log('Datos login', this.data);
+    this.navCtrl.push('listado-peliculas');
   }
 
 }
