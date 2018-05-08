@@ -38,7 +38,6 @@ export class HomePage {
     this.showLoading('Iniciando sesión');
     setTimeout(() => {
       this.storage.setItem('session', '{auth_token: jashdkjhasdjkhaskjd}');
-      this.storage.clear();
       this.hideLoading();
       this.navCtrl.setRoot('listado-peliculas');
     }, 850);
