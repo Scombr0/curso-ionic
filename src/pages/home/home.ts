@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, LoadingController, IonicPage, ToastController } from 'ionic-angular';
+import { NavController, LoadingController, IonicPage, ToastController, Loading } from 'ionic-angular';
 import { PeliculasProvider } from '../../providers/peliculas/peliculas';
 
 @Component({
@@ -10,6 +10,9 @@ export class HomePage {
   public data: any;
   public buscandoPeliculas: boolean;
 
+  private instanciaLoading: Loading;
+  private storage: Storage;
+
   constructor(
     public navCtrl: NavController,
     public peliculasProvider: PeliculasProvider,
@@ -19,6 +22,7 @@ export class HomePage {
   ) {
     this.data = {};
     this.buscandoPeliculas = false;
+    this.storage = (window as any).localStorage;
   }
 
   ionViewDidEnter() {
@@ -31,7 +35,27 @@ export class HomePage {
 
   public login(): void {
     console.log('Datos login', this.data);
-    this.navCtrl.push('listado-peliculas');
+    this.showLoading('Iniciando sesión');
+    setTimeout(() => {
+      this.storage.setItem('session', '{auth_token: jashdkjhasdjkhaskjd}');
+      this.storage.clear();
+      this.hideLoading();
+      this.navCtrl.setRoot('listado-peliculas');
+    }, 850);
+  }
+
+  private showLoading(message?): void {
+    this.instanciaLoading = this.loadingCtrl.create({
+      content: message,
+    });
+    this.instanciaLoading.present();
+  }
+
+  private hideLoading(): void {
+    if (this.instanciaLoading) {
+      this.instanciaLoading.dismiss();
+      this.instanciaLoading = null;
+    }
   }
 
 }
