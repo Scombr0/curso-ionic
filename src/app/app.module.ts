@@ -9,6 +9,9 @@ import { HomePage } from '../pages/home/home';
 import { PeliculasProvider } from '../providers/peliculas/peliculas';
 import { HttpClientModule } from '@angular/common/http';
 
+// ionic-native
+import { Camera } from '@ionic-native/camera';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -28,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PeliculasProvider
+    PeliculasProvider,
+    Camera
   ]
 })
 export class AppModule {}
