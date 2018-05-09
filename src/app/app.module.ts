@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // ionic-native
 import { Camera } from '@ionic-native/camera';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { Camera } from '@ionic-native/camera';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PeliculasProvider,
-    Camera
+    Camera,
+    Geolocation
   ]
 })
 export class AppModule {}

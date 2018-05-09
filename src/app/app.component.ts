@@ -16,7 +16,7 @@ export class MyApp {
     let paginaInicial;
     let logged = this.storage.getItem('session');
     if (logged) {
-      paginaInicial = 'foto-perfil';
+      paginaInicial = 'mi-ubicacion';
     }
     else {
       paginaInicial = HomePage;
